@@ -11,10 +11,8 @@
             font-family: "Times New Roman", Times, serif;
             margin: 0;
             display: flex;
-            /* Changed from center to flex-start to move text higher */
             justify-content: center;
             align-items: flex-start; 
-            /* Added top padding to control exactly how high the text is */
             padding: 15vh 40px 40px 40px;
             height: 100vh;
             -webkit-font-smoothing: antialiased;
@@ -25,27 +23,33 @@
             width: 100%;
         }
 
-        #typing-text {
-            font-size: 1.6rem;
+        p {
+            /* font-weight: 700 makes it bold/thicker */
+            font-weight: 700;
+            font-size: 1.65rem;
             line-height: 1.5;
             text-align: left;
-            white-space: pre-wrap; /* Keeps the spacing natural */
+            margin: 0;
+            display: inline;
+            letter-spacing: 0.01rem;
         }
 
-        /* The Blinking Cursor */
+        /* The Blinking Cursor - also made slightly thicker to match */
         .cursor {
             display: inline-block;
-            width: 2px;
-            height: 1.6rem;
+            width: 3px; 
+            height: 1.8rem;
             background-color: black;
-            margin-left: 5px;
+            margin-left: 4px;
             vertical-align: middle;
+            position: relative;
+            top: -2px;
             animation: blink 1s step-end infinite;
         }
 
         @keyframes blink {
-            from, to { background-color: transparent; }
-            50% { background-color: black; }
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         @media (max-width: 600px) {
@@ -54,8 +58,12 @@
                 padding-left: 20px;
                 padding-right: 20px;
             }
-            #typing-text {
-                font-size: 1.3rem;
+            p {
+                font-size: 1.4rem;
+            }
+            .cursor {
+                height: 1.5rem;
+                width: 2px;
             }
         }
     </style>
@@ -63,25 +71,8 @@
 <body>
 
     <div class="container">
-        <span id="typing-text"></span><span class="cursor"></span>
+        <p>Machrozet is a multi-disciplinary production company that produces, manages, and curates cultural programs, community events, and artistic performances for and in partnership with non-profits, cultural institutions, artists, and the general public.</p><span class="cursor"></span>
     </div>
-
-    <script>
-        const text = "Machrozet is a multi-disciplinary production company that produces, manages, and curates cultural programs, community events, and artistic performances for and in partnership with non-profits, cultural institutions, artists, and the general public.";
-        const speed = 40; // The speed of typing in milliseconds
-        let i = 0;
-
-        function typeWriter() {
-            if (i < text.length) {
-                document.getElementById("typing-text").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
-            }
-        }
-
-        // Start the effect when the page loads
-        window.onload = typeWriter;
-    </script>
 
 </body>
 </html>
