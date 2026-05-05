@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Machrozet</title>
     <style>
+        /* This fixes an iOS Safari/Instagram in-app bug */
+        html {
+            height: -webkit-fill-available;
+        }
+
         body {
-            /* Matched to the warm off-white of the mockup */
             background-color: #F2F1EA; 
             color: #000000;
             font-family: "Times New Roman", Times, serif;
@@ -15,10 +19,16 @@
             flex-direction: column;
             justify-content: center;
             align-items: center; 
+            
+            /* Fallback for older browsers, then the dynamic height for modern/in-app browsers */
             min-height: 100vh;
+            min-height: 100dvh; 
+            min-height: -webkit-fill-available; 
+            
             position: relative;
             -webkit-font-smoothing: antialiased;
-            overflow: hidden; /* Prevents scrollbars on desktop */
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+            overflow-y: auto; /* Forces vertical scrolling to work */
         }
 
         .logo-container {
@@ -31,7 +41,7 @@
 
         .logo {
             width: 80%;
-            max-width: 650px; /* Adjust this value if you want the logo bigger/smaller */
+            max-width: 650px; 
             height: auto;
         }
 
@@ -57,8 +67,11 @@
         @media (max-width: 768px) {
             body {
                 padding: 20px;
-                justify-content: center;
-                overflow: auto;
+                /* Changing this from center to flex-start prevents content from clipping at the top */
+                justify-content: flex-start; 
+            }
+            .logo-container {
+                margin-top: 20vh; /* Pushes the logo down slightly since we removed center justification */
             }
             .description {
                 position: relative;
@@ -71,10 +84,7 @@
                 position: relative;
                 bottom: auto;
                 margin-top: 30px;
-                margin-bottom: 20px;
-            }
-            .logo-container {
-                margin-top: 0;
+                margin-bottom: 40px; /* Added extra padding to ensure it clears the IG bottom bar */
             }
         }
     </style>
@@ -95,6 +105,5 @@
 
 </body>
 </html>
-
 </body>
 </html>
