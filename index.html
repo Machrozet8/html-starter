@@ -17,18 +17,19 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Ensures scrolling works cleanly */
             align-items: center; 
             
-            /* Fallback for older browsers, then the dynamic height for modern/in-app browsers */
+            /* Fallback for older browsers, then dynamic height for modern/in-app browsers */
             min-height: 100vh;
             min-height: 100dvh; 
             min-height: -webkit-fill-available; 
             
             position: relative;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden; /* Prevents horizontal scrolling */
-            overflow-y: auto; /* Forces vertical scrolling to work */
+            overflow-x: hidden; 
+            overflow-y: auto; 
+            padding-top: 10vh; /* Adds some clean space at the very top */
         }
 
         .logo-container {
@@ -37,6 +38,7 @@
             align-items: center;
             width: 100%;
             z-index: 2;
+            margin-bottom: 40px; /* Gives space between the logo and the ticket widget */
         }
 
         .logo {
@@ -44,6 +46,17 @@
             max-width: 650px; 
             height: auto;
         }
+
+        /* --- TICKETING WIDGET SECTION --- */
+        .widget-section {
+            width: 90%;
+            max-width: 800px; /* Gives the widget plenty of room to expand */
+            display: flex;
+            justify-content: center;
+            margin-bottom: 120px; /* Keeps it from colliding with your bottom text */
+            z-index: 2;
+        }
+        /* -------------------------------- */
 
         .date {
             position: absolute;
@@ -63,28 +76,58 @@
             font-weight: normal;
         }
 
+        /* --- INSTAGRAM LINK --- */
+        .instagram-link {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            font-size: 0.85rem;
+            color: #000000;
+            text-decoration: none; /* Removes the default blue underline */
+            border-bottom: 1px solid black; /* Adds a cleaner, custom underline */
+            letter-spacing: 0.02rem;
+            z-index: 2;
+            transition: opacity 0.2s ease;
+        }
+
+        .instagram-link:hover {
+            opacity: 0.6; /* Slight fade effect when you hover over it */
+        }
+        /* ---------------------- */
+
         /* Responsive layout for smaller screens */
         @media (max-width: 768px) {
             body {
                 padding: 20px;
-                /* Changing this from center to flex-start prevents content from clipping at the top */
+                padding-top: 40px;
                 justify-content: flex-start; 
             }
             .logo-container {
-                margin-top: 20vh; /* Pushes the logo down slightly since we removed center justification */
+                margin-top: 0;
+                margin-bottom: 30px;
+            }
+            .widget-section {
+                margin-bottom: 40px;
             }
             .description {
                 position: relative;
                 bottom: auto;
                 left: auto;
-                margin-top: 60px;
+                margin-top: 20px;
                 max-width: 90%;
             }
             .date {
                 position: relative;
                 bottom: auto;
                 margin-top: 30px;
-                margin-bottom: 40px; /* Added extra padding to ensure it clears the IG bottom bar */
+                margin-bottom: 20px;
+            }
+            .instagram-link {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 10px;
+                margin-bottom: 40px; 
             }
         }
     </style>
@@ -95,6 +138,10 @@
         <img src="mach logo.png" alt="Machrozet" class="logo">
     </div>
 
+    <div class="widget-section">
+        <div class="tt-widget"><div class="tt-widget-fallback"><p><a href="https://www.tickettailor.com/all-tickets/machrozetworks/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true" target="_blank">Click here to buy tickets</a><br /><small><a href="https://www.tickettailor.com?rf=wdg_307013" class="tt-widget-powered">Sell tickets online with Ticket Tailor</a></small></p></div><script src="https://cdn.tickettailor.com/js/widgets/min/widget.js" data-url="https://www.tickettailor.com/all-tickets/machrozetworks/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true" data-type="inline" data-inline-minimal="true" data-inline-show-logo="false" data-inline-bg-fill="false" data-inline-inherit-ref-from-url-param="" data-inline-ref="website_widget"></script></div>
+        </div>
+
     <div class="description">
         Machrozet is a multi-disciplinary studio that produces, manages, and curates cultural programs, community events, and artistic performances for and in partnership with non-profits, cultural institutions, artists, and the general public.
     </div>
@@ -103,7 +150,7 @@
         2026.5686
     </div>
 
-</body>
-</html>
+    <a href="https://instagram.com/machrozet8" target="_blank" class="instagram-link">Follow @machrozet</a>
+
 </body>
 </html>
