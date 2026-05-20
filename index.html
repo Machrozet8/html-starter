@@ -32,169 +32,14 @@
             padding-top: 10vh; 
         }
 
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            z-index: 2;
-            margin-bottom: 60px; /* Space under the logo */
-        }
-
-        .logo {
-            width: 80%;
-            max-width: 650px; 
-            height: auto;
-        }
-
-        /* --- CLEAN CUSTOM BUTTON STYLE --- */
-        .ticket-section {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 140px; /* Generous space above bottom footer text */
-            z-index: 2;
-        }
-
-        .custom-ticket-button {
-            font-family: "Times New Roman", Times, serif;
-            font-size: 1.1rem;
-            color: #000000;
-            text-decoration: none;
-            letter-spacing: 0.05rem;
-            
-            /* Creates a clean, elegant framed outline */
-            border: 1px solid #000000; 
-            padding: 15px 40px;
-            background-color: transparent;
-            
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-
-        /* Subtle dark fill effect when user hovers over the button */
-        .custom-ticket-button:hover {
-            background-color: #000000;
-            color: #F2F1EA;
-        }
-        /* --------------------------------- */
-
-        .date {
-            position: absolute;
-            bottom: 40px;
-            font-size: 0.9rem;
-            letter-spacing: 0.05rem;
-        }
-
-        .description {
-            position: absolute;
-            bottom: 40px;
-            left: 40px;
-            max-width: 320px;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            text-align: left;
-            font-weight: normal;
-        }
-
-        .instagram-link {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            font-size: 0.85rem;
-            color: #000000;
-            text-decoration: none; 
-            border-bottom: 1px solid black; 
-            letter-spacing: 0.02rem;
-            z-index: 2;
-            transition: opacity 0.2s ease;
-        }
-
-        .instagram-link:hover {
-            opacity: 0.6; 
-        }
-
-        /* Responsive layout for mobile devices & Instagram app browser */
-        @media (max-width: 768px) {
-            body {
-                padding: 20px;
-                padding-top: 60px;
-                justify-content: flex-start; 
-            }
-            .logo-container {
-                margin-bottom: 50px;
-            }
-            .ticket-section {
-                margin-bottom: 60px;
-            }
-            .custom-ticket-button {
-                font-size: 1rem;
-                padding: 12px 30px;
-                width: 80%; /* Makes button easier to tap on phones */
-                text-align: center;
-            }
-            .description {
-                position: relative;
-                bottom: auto;
-                left: auto;
-                margin-top: 20px;
-                max-width: 90%;
-            }
-            .date {
-                position: relative;
-                bottom: auto;
-                margin-top: 30px;
-                margin-bottom: 15px;
-            }
-            .instagram-link {
-                position: relative;
-                bottom: auto;
-                right: auto;
-                margin-top: 10px;
-                margin-bottom: 40px; 
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="logo-container">
-        <img src="mach logo.png" alt="Machrozet" class="logo">
-    </div>
-
-    <div class="ticket-section">
-        <a href="<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machrozet</title>
-    <style>
-        /* This fixes an iOS Safari/Instagram in-app bug */
-        html {
-            height: -webkit-fill-available;
-        }
-
-        body {
-            background-color: #F2F1EA; 
-            color: #000000;
-            font-family: "Times New Roman", Times, serif;
-            margin: 0;
+        /* Container for all central scrolling content (Logo, Flyer, Button) */
+        .main-content {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
-            align-items: center; 
-            
-            /* Dynamic height for modern/in-app browsers */
-            min-height: 100vh;
-            min-height: 100dvh; 
-            min-height: -webkit-fill-available; 
-            
-            position: relative;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden; 
-            overflow-y: auto; 
-            padding-top: 10vh; 
+            align-items: center;
+            width: 100%;
+            margin-bottom: 140px; /* Pushes content above absolute footer elements */
+            z-index: 2;
         }
 
         .logo-container {
@@ -202,8 +47,6 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            z-index: 2;
-            margin-bottom: 60px; /* Space under the logo */
         }
 
         .logo {
@@ -212,13 +55,28 @@
             height: auto;
         }
 
+        /* --- NEW FLYER STYLE --- */
+        .flyer-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 40px; /* Space under the logo */
+            margin-bottom: 40px; /* Space above the button */
+        }
+
+        .flyer {
+            width: 80%;
+            max-width: 400px; /* Keep it from being too massive on desktop */
+            height: auto;
+            aspect-ratio: 3/4; /* Ensure it respects the 3:4 aspect ratio */
+        }
+        /* ------------------------ */
+
         /* --- CLEAN CUSTOM BUTTON STYLE --- */
         .ticket-section {
             width: 100%;
             display: flex;
             justify-content: center;
-            margin-bottom: 140px; /* Generous space above bottom footer text */
-            z-index: 2;
         }
 
         .custom-ticket-button {
@@ -286,11 +144,21 @@
                 padding-top: 60px;
                 justify-content: flex-start; 
             }
+            .main-content {
+                margin-bottom: 60px;
+            }
             .logo-container {
-                margin-bottom: 50px;
+                margin-bottom: 20px;
+            }
+            .flyer-container {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .flyer {
+                max-width: 300px;
             }
             .ticket-section {
-                margin-bottom: 60px;
+                margin-bottom: 20px;
             }
             .custom-ticket-button {
                 font-size: 1rem;
@@ -323,28 +191,20 @@
 </head>
 <body>
 
-    <div class="logo-container">
-        <img src="mach logo.png" alt="Machrozet" class="logo">
-    </div>
+    <div class="main-content">
+        <div class="logo-container">
+            <img src="mach logo.png" alt="Machrozet" class="logo">
+        </div>
 
-    <div class="ticket-section">
-        <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
-            Buy Tickets & Event Info
-        </a>
-    </div>
+        <div class="flyer-container">
+            <img src="0604_STHL.png" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
+        </div>
 
-    <div class="description">
-        Machrozet is a multi-disciplinary studio that produces, manages, and curates cultural programs, community events, and artistic performances for and in partnership with non-profits, cultural institutions, artists, and the general public.
-    </div>
-
-    <div class="date">
-        2026.5686
-    </div>
-
-</body>
-</html>" target="_blank" class="custom-ticket-button">
-            Buy Tickets For Saw Thunder Heard Lighnting 
-        </a>
+        <div class="ticket-section">
+            <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
+                Tickets & Event Info
+            </a>
+        </div>
     </div>
 
     <div class="description">
