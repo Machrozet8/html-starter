@@ -37,7 +37,7 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            margin-bottom: 140px; 
+            margin-bottom: 160px; /* Increased slightly to give the detached button breathing room */
             z-index: 2;
         }
 
@@ -48,7 +48,7 @@
             align-items: center;
             width: 100%;
             position: relative;
-            z-index: 5; /* Ensures logo sits cleanly over the images */
+            z-index: 5; 
         }
 
         .logo {
@@ -61,38 +61,30 @@
         .image-row {
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Anchors the flyer and button column to the bottom baseline of the photos */
-            width: 90%;
-            max-width: 800px;
-            gap: 0; /* Absolute zero padding or gaps between the three elements */
+            align-items: flex-end; /* Align the bottom of the two photos and the poster image directly */
+            width: 95%;
+            max-width: 900px;
+            gap: 0; /* No padding or gaps between elements */
             
-            /* Pulls the image row up to align perfectly with the Hebrew text line */
-            margin-top: -8%; 
+            /* Adjusted to keep tops perfectly aligned with the Hebrew text at the new 3% larger size */
+            margin-top: -5.5%; 
             position: relative;
             z-index: 3; 
         }
 
-        /* Locks alignment once the logo hits its maximum desktop scale width */
-        @media (min-width: 857px) {
-            .image-row {
-                margin-top: -69px; 
-            }
-        }
-
+        /* All image columns increased by 3% (from 24% to 27%) */
         .gallery-img {
-            width: 24%; /* Seamless structural sizing under the logo */
+            width: 27%; 
             height: auto;
             object-fit: cover;
             display: block;
         }
 
-        /* Right Column: Holds the flyer image and its aligned button underneath */
-        .flyer-column {
-            width: 24%; /* Matches photo widths perfectly for row symmetry */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px; /* Clean, tight tracking space between flyer and details button */
+        /* Container for the poster element */
+        .flyer-container {
+            width: 27%; 
+            position: relative; /* Allows the button to anchor directly below it without altering container height */
+            display: block;
         }
 
         .flyer {
@@ -104,6 +96,12 @@
 
         /* --- DETAILS CAPTION BUTTON --- */
         .custom-ticket-button {
+            position: absolute;
+            top: calc(100% + 12px); /* Places the button cleanly right after the aligned poster base */
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+
             font-family: "Times New Roman", Times, serif;
             font-size: 0.75rem; 
             color: #000000;
@@ -118,6 +116,7 @@
             
             transition: all 0.3s ease;
             text-transform: uppercase;
+            z-index: 4;
         }
 
         .custom-ticket-button:hover {
@@ -161,7 +160,7 @@
             opacity: 0.6; 
         }
 
-        /* Clean responsive stacking fallback rules for mobile layout views */
+        /* Clean responsive stacking rules for mobile layouts */
         @media (max-width: 768px) {
             body {
                 padding: 20px;
@@ -177,13 +176,21 @@
             .image-row {
                 flex-direction: column;
                 align-items: center;
-                gap: 30px;
-                margin-top: 20px; /* Safely clears layout collision overlaps on small smartphone screens */
+                gap: 35px;
+                margin-top: 20px; 
             }
-            .gallery-img, .flyer-column {
-                width: 75%; 
+            .gallery-img, .flyer-container {
+                width: 80%; 
             }
+            
+            /* Returns button to standard flow instead of absolute positioning when stacked on mobile */
             .custom-ticket-button {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin-top: 12px;
+                display: inline-block;
                 width: 80%;
             }
             
@@ -191,7 +198,7 @@
                 position: relative;
                 bottom: auto;
                 left: auto;
-                margin-top: 20px;
+                margin-top: 40px;
                 max-width: 90%;
             }
             .date {
@@ -224,7 +231,7 @@
             
             <img src="4Z3A6543.jpg" alt="Machrozet Art 2" class="gallery-img">
             
-            <div class="flyer-column">
+            <div class="flyer-container">
                 <img src="0604_STHL.png" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
                 <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
                     Details 
