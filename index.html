@@ -64,9 +64,9 @@
             align-items: flex-end; /* Bottom aligns all elements */
             width: 95%;
             max-width: 900px;
-            gap: 0; /* No gaps or padding between columns */
+            gap: 0; /* Zero padding or gaps between columns */
             
-            margin-top: 15px; /* Pushes row right below the Hebrew characters */
+            margin-top: 15px; /* Aligns row right below the Hebrew characters */
             position: relative;
             z-index: 3; 
         }
@@ -88,12 +88,10 @@
             align-items: center;
         }
 
+        /* Original unedited flyer image presentation */
         .flyer {
             width: 100%;
             height: auto;
-            aspect-ratio: 2/3; 
-            object-fit: cover;
-            object-position: top;
             display: block;
         }
 
@@ -185,10 +183,8 @@
             .gallery-img, .flyer-container {
                 width: 80%; 
             }
-            .flyer {
-                aspect-ratio: auto; 
-            }
             
+            /* Returns button to standard UI flow when stacked on mobile */
             .custom-ticket-button {
                 position: relative;
                 top: auto;
@@ -239,7 +235,7 @@
             <div class="flyer-container">
                 <img src="0604_STHL.png" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
                 <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
-                    Event Details 
+                    Details 
                 </a>
             </div>
 
