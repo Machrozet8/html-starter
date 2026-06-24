@@ -1,6 +1,3 @@
-HTML
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,94 +42,69 @@ HTML
             z-index: 2;
         }
 
-        /* --- NEW COLLAGE STYLE SECTION --- */
-        .collage-container {
-            position: relative;
-            width: 100%;
-            max-width: 1100px;
+        /* --- LOGO SECTION --- */
+        .logo-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-top: 60px;
-            padding-bottom: 100px;
+            width: 100%;
+            position: relative;
+            z-index: 5; /* Keeps logo on top of the images */
         }
 
         .logo {
             width: 70%;
             max-width: 600px; 
             height: auto;
-            position: relative;
-            z-index: 5; /* Sits between the background and foreground images */
         }
 
-        .concept-img {
-            position: absolute;
-            object-fit: cover;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Optional: Adds a slight shadow to pop them off the background */
-        }
-
-        /* Matches the bottom-left image in your concept */
-        .img-left {
-            width: 25%;
-            max-width: 260px;
-            left: 5%;
-            bottom: 0;
-            z-index: 3;
-        }
-
-        /* Matches the center image overlapping the Hebrew text */
-        .img-center {
-            width: 22%;
-            max-width: 220px;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 20px; 
-            z-index: 10; /* Forces this image to sit ON TOP of the logo */
-        }
-
-        /* Matches the top-right image in your concept */
-        .img-right {
-            width: 20%;
-            max-width: 200px;
-            right: 5%;
-            top: 0;
-            z-index: 3;
-        }
-        /* --------------------------------- */
-
-        /* --- FLYER STYLE (Now Smaller) --- */
-        .flyer-container {
+        /* --- NEW ALIGNED IMAGE ROW SECTION --- */
+        .image-row {
             display: flex;
             justify-content: center;
-            width: 100%;
-            margin-top: 20px;
-            margin-bottom: 30px; 
+            align-items: flex-start;
+            width: 90%;
+            max-width: 1000px;
+            gap: 4%; /* Space between the three columns */
+            
+            /* Pulls the row up so it tucks under the Hebrew text */
+            margin-top: -6%; 
+            position: relative;
+            z-index: 3; 
+        }
+
+        .gallery-img {
+            width: 30%; /* Forces images to take up 1/3 of the row */
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        }
+
+        /* Container specifically for the 3rd slot (Flyer + Button) */
+        .flyer-column {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px; /* Space between flyer and button */
         }
 
         .flyer {
-            width: 80%;
-            max-width: 240px; /* Shrunk down from 400px so it is secondary */
-            height: auto;
-            aspect-ratio: 3/4; 
-        }
-        /* --------------------------------- */
-
-        /* --- CLEAN CUSTOM BUTTON STYLE --- */
-        .ticket-section {
             width: 100%;
-            display: flex;
-            justify-content: center;
+            height: auto;
+            aspect-ratio: 3/4;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
         }
 
+        /* --- SMALLER CUSTOM BUTTON STYLE --- */
         .custom-ticket-button {
             font-family: "Times New Roman", Times, serif;
-            font-size: 0.95rem; /* Shrunk font size slightly to match the smaller flyer */
+            font-size: 0.8rem; /* Shrunk font size */
             color: #000000;
             text-decoration: none;
             letter-spacing: 0.05rem;
             
             border: 1px solid #000000; 
-            padding: 10px 30px; /* Reduced padding for a smaller button */
+            padding: 8px 24px; /* Reduced padding for a more subtle button */
             background-color: transparent;
             
             transition: all 0.3s ease;
@@ -148,137 +120,4 @@ HTML
         .date {
             position: absolute;
             bottom: 40px;
-            font-size: 0.9rem;
-            letter-spacing: 0.05rem;
-        }
-
-        .description {
-            position: absolute;
-            bottom: 40px;
-            left: 40px;
-            max-width: 320px;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            text-align: left;
-            font-weight: normal;
-        }
-
-        .instagram-link {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            font-size: 0.85rem;
-            color: #000000;
-            text-decoration: none; 
-            border-bottom: 1px solid black; 
-            letter-spacing: 0.02rem;
-            z-index: 2;
-            transition: opacity 0.2s ease;
-        }
-
-        .instagram-link:hover {
-            opacity: 0.6; 
-        }
-
-        /* Responsive layout for mobile devices & Instagram app browser */
-        @media (max-width: 768px) {
-            body {
-                padding: 20px;
-                padding-top: 60px;
-                justify-content: flex-start; 
-            }
-            .main-content {
-                margin-bottom: 60px;
-            }
-            
-            /* Stacks the collage neatly on phones so images don't clip off screen */
-            .collage-container {
-                flex-direction: column;
-                padding-top: 0;
-                padding-bottom: 40px;
-                gap: 30px;
-            }
-            .concept-img {
-                position: relative;
-                width: 70%;
-                max-width: none;
-                left: auto;
-                right: auto;
-                top: auto;
-                bottom: auto;
-                transform: none;
-            }
-            .logo {
-                order: -1; /* Keeps the logo at the very top on mobile */
-                width: 90%;
-                margin-bottom: 20px;
-            }
-
-            .flyer-container {
-                margin-top: 0px;
-                margin-bottom: 20px;
-            }
-            .ticket-section {
-                margin-bottom: 20px;
-            }
-            .custom-ticket-button {
-                width: 80%; 
-                text-align: center;
-            }
-            .description {
-                position: relative;
-                bottom: auto;
-                left: auto;
-                margin-top: 20px;
-                max-width: 90%;
-            }
-            .date {
-                position: relative;
-                bottom: auto;
-                margin-top: 30px;
-                margin-bottom: 15px;
-            }
-            .instagram-link {
-                position: relative;
-                bottom: auto;
-                right: auto;
-                margin-top: 10px;
-                margin-bottom: 40px; 
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="main-content">
-        
-        <div class="collage-container">
-            <img src="4Z3A6444.jpg" alt="Machrozet Art 1" class="concept-img img-left">
-            <img src="mach logo.png" alt="Machrozet" class="logo">
-            <img src="4Z3A6543.jpg" alt="Machrozet Art 2" class="concept-img img-center">
-            <img src="4Z3A6738-2.jpg" alt="Machrozet Art 3" class="concept-img img-right">
-        </div>
-
-        <div class="flyer-container">
-            <img src="0604_STHL.png" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
-        </div>
-
-        <div class="ticket-section">
-            <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
-                Details 
-            </a>
-        </div>
-    </div>
-
-    <div class="description">
-        Machrozet is a multi-disciplinary studio that produces, manages, and curates cultural programs, community events, and artistic performances for and in partnership with non-profits, cultural institutions, artists, and the general public.
-    </div>
-
-    <div class="date">
-        2026.5686
-    </div>
-
-    <a href="https://instagram.com/machrozet8" target="_blank" class="instagram-link">Follow @machrozet8</a>
-
-</body>
-</html>
+            font-size:
