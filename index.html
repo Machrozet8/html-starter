@@ -1,3 +1,6 @@
+HTML
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,45 +35,87 @@
             padding-top: 10vh; 
         }
 
-        /* Container for all central scrolling content (Logo, Flyer, Button) */
+        /* Container for all central scrolling content */
         .main-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            margin-bottom: 140px; /* Pushes content above absolute footer elements */
+            margin-bottom: 140px; 
             z-index: 2;
         }
 
-        .logo-container {
+        /* --- NEW COLLAGE STYLE SECTION --- */
+        .collage-container {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
+            padding-top: 60px;
+            padding-bottom: 100px;
         }
 
         .logo {
-            width: 80%;
-            max-width: 650px; 
+            width: 70%;
+            max-width: 600px; 
             height: auto;
+            position: relative;
+            z-index: 5; /* Sits between the background and foreground images */
         }
 
-        /* --- NEW FLYER STYLE --- */
+        .concept-img {
+            position: absolute;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Optional: Adds a slight shadow to pop them off the background */
+        }
+
+        /* Matches the bottom-left image in your concept */
+        .img-left {
+            width: 25%;
+            max-width: 260px;
+            left: 5%;
+            bottom: 0;
+            z-index: 3;
+        }
+
+        /* Matches the center image overlapping the Hebrew text */
+        .img-center {
+            width: 22%;
+            max-width: 220px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 20px; 
+            z-index: 10; /* Forces this image to sit ON TOP of the logo */
+        }
+
+        /* Matches the top-right image in your concept */
+        .img-right {
+            width: 20%;
+            max-width: 200px;
+            right: 5%;
+            top: 0;
+            z-index: 3;
+        }
+        /* --------------------------------- */
+
+        /* --- FLYER STYLE (Now Smaller) --- */
         .flyer-container {
             display: flex;
             justify-content: center;
             width: 100%;
-            margin-top: 40px; /* Space under the logo */
-            margin-bottom: 40px; /* Space above the button */
+            margin-top: 20px;
+            margin-bottom: 30px; 
         }
 
         .flyer {
             width: 80%;
-            max-width: 400px; /* Keep it from being too massive on desktop */
+            max-width: 240px; /* Shrunk down from 400px so it is secondary */
             height: auto;
-            aspect-ratio: 3/4; /* Ensure it respects the 3:4 aspect ratio */
+            aspect-ratio: 3/4; 
         }
-        /* ------------------------ */
+        /* --------------------------------- */
 
         /* --- CLEAN CUSTOM BUTTON STYLE --- */
         .ticket-section {
@@ -81,21 +126,19 @@
 
         .custom-ticket-button {
             font-family: "Times New Roman", Times, serif;
-            font-size: 1.1rem;
+            font-size: 0.95rem; /* Shrunk font size slightly to match the smaller flyer */
             color: #000000;
             text-decoration: none;
             letter-spacing: 0.05rem;
             
-            /* Creates a clean, elegant framed outline */
             border: 1px solid #000000; 
-            padding: 15px 40px;
+            padding: 10px 30px; /* Reduced padding for a smaller button */
             background-color: transparent;
             
             transition: all 0.3s ease;
             text-transform: uppercase;
         }
 
-        /* Subtle dark fill effect when user hovers over the button */
         .custom-ticket-button:hover {
             background-color: #000000;
             color: #F2F1EA;
@@ -147,23 +190,39 @@
             .main-content {
                 margin-bottom: 60px;
             }
-            .logo-container {
+            
+            /* Stacks the collage neatly on phones so images don't clip off screen */
+            .collage-container {
+                flex-direction: column;
+                padding-top: 0;
+                padding-bottom: 40px;
+                gap: 30px;
+            }
+            .concept-img {
+                position: relative;
+                width: 70%;
+                max-width: none;
+                left: auto;
+                right: auto;
+                top: auto;
+                bottom: auto;
+                transform: none;
+            }
+            .logo {
+                order: -1; /* Keeps the logo at the very top on mobile */
+                width: 90%;
                 margin-bottom: 20px;
             }
+
             .flyer-container {
-                margin-top: 20px;
+                margin-top: 0px;
                 margin-bottom: 20px;
-            }
-            .flyer {
-                max-width: 300px;
             }
             .ticket-section {
                 margin-bottom: 20px;
             }
             .custom-ticket-button {
-                font-size: 1rem;
-                padding: 12px 30px;
-                width: 80%; /* Makes button easier to tap on phones */
+                width: 80%; 
                 text-align: center;
             }
             .description {
@@ -192,8 +251,12 @@
 <body>
 
     <div class="main-content">
-        <div class="logo-container">
+        
+        <div class="collage-container">
+            <img src="4Z3A6444.jpg" alt="Machrozet Art 1" class="concept-img img-left">
             <img src="mach logo.png" alt="Machrozet" class="logo">
+            <img src="4Z3A6543.jpg" alt="Machrozet Art 2" class="concept-img img-center">
+            <img src="4Z3A6738-2.jpg" alt="Machrozet Art 3" class="concept-img img-right">
         </div>
 
         <div class="flyer-container">
