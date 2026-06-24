@@ -120,4 +120,120 @@
         .date {
             position: absolute;
             bottom: 40px;
-            font-size:
+            font-size: 0.9rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .description {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            max-width: 320px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            text-align: left;
+            font-weight: normal;
+        }
+
+        .instagram-link {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            font-size: 0.85rem;
+            color: #000000;
+            text-decoration: none; 
+            border-bottom: 1px solid black; 
+            letter-spacing: 0.02rem;
+            z-index: 2;
+            transition: opacity 0.2s ease;
+        }
+
+        .instagram-link:hover {
+            opacity: 0.6; 
+        }
+
+        /* Responsive layout for mobile devices & Instagram app browser */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+                padding-top: 60px;
+                justify-content: flex-start; 
+            }
+            .main-content {
+                margin-bottom: 60px;
+            }
+            .logo {
+                width: 90%;
+            }
+            
+            /* Stacks the images in a single column on phones */
+            .image-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+                margin-top: 10px; /* Removes negative overlap on mobile */
+            }
+            .gallery-img, .flyer-column {
+                width: 70%; /* Makes them larger on small screens */
+            }
+            
+            .description {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                margin-top: 20px;
+                max-width: 90%;
+            }
+            .date {
+                position: relative;
+                bottom: auto;
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+            .instagram-link {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 10px;
+                margin-bottom: 40px; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        
+        <div class="logo-container">
+            <img src="mach logo.png" alt="Machrozet" class="logo">
+        </div>
+
+        <div class="image-row">
+            
+            <img src="4Z3A6444.jpg" alt="Machrozet Art 1" class="gallery-img">
+            
+            <img src="4Z3A6543.jpg" alt="Machrozet Art 2" class="gallery-img">
+            
+            <div class="flyer-column">
+                <img src="0604_STHL.png" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
+                <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
+                    Details 
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="description">
+        Machrozet is a multi-disciplinary studio that produces, manages, and curates cultural programs, community events, and artistic performances for and in partnership with non-profits, cultural institutions, artists, and the general public.
+    </div>
+
+    <div class="date">
+        2026.5686
+    </div>
+
+    <a href="https://instagram.com/machrozet8" target="_blank" class="instagram-link">Follow @machrozet8</a>
+
+</body>
+</html>
