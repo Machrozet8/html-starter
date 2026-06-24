@@ -37,42 +37,56 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            margin-bottom: 160px; /* Increased slightly to give the detached button breathing room */
+            margin-bottom: 160px; /* Gives the detached bottom button room to breathe */
             z-index: 2;
         }
 
-        /* --- LOGO SECTION --- */
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* --- UNIFIED LAYER CONTAINER --- */
+        /* Stacks logo text and image collage on top of each other in the exact same container bounds */
+        .unified-layout-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            justify-items: center;
             width: 100%;
             position: relative;
-            z-index: 5; 
         }
 
         .logo {
+            grid-column: 1;
+            grid-row: 1;
             width: 70%;
             max-width: 600px; 
             height: auto;
+            z-index: 5; /* Logo layers cleanly on top of the images */
+            pointer-events: none; /* Allows user to click underneath empty text spaces */
         }
 
         /* --- COLLAGE ROW SECTION --- */
         .image-row {
+            grid-column: 1;
+            grid-row: 1;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Align the bottom of the two photos and the poster image directly */
+            align-items: flex-end; /* Bottom aligns the first two photos and the poster image */
             width: 95%;
             max-width: 900px;
-            gap: 0; /* No padding or gaps between elements */
-            
-            /* Adjusted to keep tops perfectly aligned with the Hebrew text at the new 3% larger size */
-            margin-top: -5.5%; 
-            position: relative;
+            gap: 0; /* Zero gaps or padding between columns */
             z-index: 3; 
+
+            /* LOCK ALIGNMENT RULE: Aligns the top edge of the image row to exactly 60.6% of the logo height */
+            /* This guarantees it locks directly to the top line of the Hebrew text permanently */
+            margin-top: calc(70% * 0.606); 
         }
 
-        /* All image columns increased by 3% (from 24% to 27%) */
+        /* Locks position rule dynamically once the logo hits its 600px desktop maximum width constraint */
+        @media (min-width: 857px) {
+            .image-row {
+                margin-top: calc(600px * 0.606); 
+            }
+        }
+
+        /* Enforced 3% size enlargement */
         .gallery-img {
             width: 27%; 
             height: auto;
@@ -83,7 +97,7 @@
         /* Container for the poster element */
         .flyer-container {
             width: 27%; 
-            position: relative; /* Allows the button to anchor directly below it without altering container height */
+            position: relative; /* Allows button to detach below without distorting row alignment */
             display: block;
         }
 
@@ -97,7 +111,7 @@
         /* --- DETAILS CAPTION BUTTON --- */
         .custom-ticket-button {
             position: absolute;
-            top: calc(100% + 12px); /* Places the button cleanly right after the aligned poster base */
+            top: calc(100% + 12px); /* Places button uniformly below the bottom-aligned poster base */
             left: 50%;
             transform: translateX(-50%);
             white-space: nowrap;
@@ -160,7 +174,7 @@
             opacity: 0.6; 
         }
 
-        /* Clean responsive stacking rules for mobile layouts */
+        /* Responsive structural stacking behavior rules for mobile viewports */
         @media (max-width: 768px) {
             body {
                 padding: 20px;
@@ -170,20 +184,28 @@
             .main-content {
                 margin-bottom: 60px;
             }
+            
+            /* Releases overlay layout on smaller screens to allow clean vertical content stack */
+            .unified-layout-grid {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
             .logo {
                 width: 90%;
             }
             .image-row {
+                width: 100%;
                 flex-direction: column;
                 align-items: center;
                 gap: 35px;
-                margin-top: 20px; 
+                margin-top: 30px; 
             }
             .gallery-img, .flyer-container {
                 width: 80%; 
             }
             
-            /* Returns button to standard flow instead of absolute positioning when stacked on mobile */
+            /* Returns button to standard UI flow when columns stack on smartphones */
             .custom-ticket-button {
                 position: relative;
                 top: auto;
@@ -221,21 +243,23 @@
 
     <div class="main-content">
         
-        <div class="logo-container">
+        <div class="unified-layout-grid">
+            
             <img src="mach logo.png" alt="Machrozet" class="logo">
-        </div>
 
-        <div class="image-row">
-            
-            <img src="4Z3A6444.jpg" alt="Machrozet Art 1" class="gallery-img">
-            
-            <img src="4Z3A6543.jpg" alt="Machrozet Art 2" class="gallery-img">
-            
-            <div class="flyer-container">
-                <img src="0604_STHL.png" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
-                <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
-                    Details 
-                </a>
+            <div class="image-row">
+                
+                <img src="4Z3A6444.jpg" alt="Machrozet Art 1" class="gallery-img">
+                
+                <img src="4Z3A6543.jpg" alt="Machrozet Art 2" class="gallery-img">
+                
+                <div class="flyer-container">
+                    <img src="0604_STHL.png" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
+                    <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
+                        Details 
+                    </a>
+                </div>
+
             </div>
 
         </div>
