@@ -47,7 +47,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            margin-bottom: 0px; /* Explicitly zeroed out to lock the text baseline */
+            margin-bottom: 0px; 
         }
 
         .logo {
@@ -61,18 +61,17 @@
         .image-row {
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Bottom aligns all images perfectly */
+            align-items: flex-end; /* Bottom aligns all elements */
             width: 95%;
             max-width: 900px;
             gap: 0; /* No gaps or padding between columns */
             
-            /* Pushes the top edge of the images down slightly so they anchor directly below the Hebrew text characters */
-            margin-top: 15px; 
+            margin-top: 15px; /* Pushes row right below the Hebrew characters */
             position: relative;
             z-index: 3; 
         }
 
-        /* Enforced sizing */
+        /* Enforced 3% size enlargement */
         .gallery-img {
             width: 27%; 
             height: auto;
@@ -92,13 +91,16 @@
         .flyer {
             width: 100%;
             height: auto;
+            aspect-ratio: 2/3; 
+            object-fit: cover;
+            object-position: top;
             display: block;
         }
 
         /* --- DETAILS CAPTION BUTTON --- */
         .custom-ticket-button {
             position: absolute;
-            top: calc(100% + 16px); /* Keeps the button consistently spaced below the bottom baseline */
+            top: calc(100% + 16px); /* Uniform spacing right after the aligned baseline */
             left: 50%;
             transform: translateX(-50%);
             white-space: nowrap;
@@ -183,8 +185,10 @@
             .gallery-img, .flyer-container {
                 width: 80%; 
             }
+            .flyer {
+                aspect-ratio: auto; 
+            }
             
-            /* Returns button to standard UI flow when stacked on mobile */
             .custom-ticket-button {
                 position: relative;
                 top: auto;
