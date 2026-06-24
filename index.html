@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Machrozet</title>
     <style>
-        /* This fixes an iOS Safari/Instagram in-app bug */
+        /* Fixes iOS Safari/Instagram in-app browser height bugs */
         html {
             height: -webkit-fill-available;
         }
@@ -20,7 +20,6 @@
             justify-content: flex-start; 
             align-items: center; 
             
-            /* Dynamic height for modern/in-app browsers */
             min-height: 100vh;
             min-height: 100dvh; 
             min-height: -webkit-fill-available; 
@@ -32,7 +31,7 @@
             padding-top: 10vh; 
         }
 
-        /* Container for all central scrolling content */
+        /* Central content container */
         .main-content {
             display: flex;
             flex-direction: column;
@@ -49,7 +48,7 @@
             align-items: center;
             width: 100%;
             position: relative;
-            z-index: 5; /* Keeps logo crisp on top of the images */
+            z-index: 5; /* Ensures logo sits cleanly over the images */
         }
 
         .logo {
@@ -62,31 +61,38 @@
         .image-row {
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Bottom-aligns the flyer/button column perfectly with the photos */
+            align-items: flex-end; /* Anchors the flyer and button column to the bottom baseline of the photos */
             width: 90%;
             max-width: 800px;
-            gap: 0; /* No padding or gaps between the columns */
+            gap: 0; /* Absolute zero padding or gaps between the three elements */
             
-            /* Pulls the row up to align exactly with the top line of the Hebrew text */
-            margin-top: -3.2%; 
+            /* Pulls the image row up to align perfectly with the Hebrew text line */
+            margin-top: -8%; 
             position: relative;
             z-index: 3; 
         }
 
+        /* Locks alignment once the logo hits its maximum desktop scale width */
+        @media (min-width: 857px) {
+            .image-row {
+                margin-top: -69px; 
+            }
+        }
+
         .gallery-img {
-            width: 24%; /* Balanced sizing to frame under the logo seamlessly */
+            width: 24%; /* Seamless structural sizing under the logo */
             height: auto;
             object-fit: cover;
             display: block;
         }
 
-        /* Container for the 3rd slot (Flyer + Button) */
+        /* Right Column: Holds the flyer image and its aligned button underneath */
         .flyer-column {
-            width: 24%; /* Matches the exact width of the images for perfect symmetry */
+            width: 24%; /* Matches photo widths perfectly for row symmetry */
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px; /* Clean, tight space between flyer and its button */
+            gap: 8px; /* Clean, tight tracking space between flyer and details button */
         }
 
         .flyer {
@@ -96,7 +102,7 @@
             display: block;
         }
 
-        /* --- SMALL CAPTION BUTTON STYLE --- */
+        /* --- DETAILS CAPTION BUTTON --- */
         .custom-ticket-button {
             font-family: "Times New Roman", Times, serif;
             font-size: 0.75rem; 
@@ -155,7 +161,7 @@
             opacity: 0.6; 
         }
 
-        /* Responsive layout for mobile devices & Instagram app browser */
+        /* Clean responsive stacking fallback rules for mobile layout views */
         @media (max-width: 768px) {
             body {
                 padding: 20px;
@@ -168,13 +174,11 @@
             .logo {
                 width: 90%;
             }
-            
-            /* Stacks the elements vertically on small screens */
             .image-row {
                 flex-direction: column;
                 align-items: center;
                 gap: 30px;
-                margin-top: 20px; /* Resets overlap layout on phones */
+                margin-top: 20px; /* Safely clears layout collision overlaps on small smartphone screens */
             }
             .gallery-img, .flyer-column {
                 width: 75%; 
@@ -221,7 +225,7 @@
             <img src="4Z3A6543.jpg" alt="Machrozet Art 2" class="gallery-img">
             
             <div class="flyer-column">
-                <img src="STHL_0604.jpg" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
+                <img src="0604_STHL.png" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
                 <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
                     Details 
                 </a>
