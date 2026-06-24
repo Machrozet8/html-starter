@@ -49,7 +49,7 @@
             align-items: center;
             width: 100%;
             position: relative;
-            z-index: 5; /* Keeps logo on top of the images */
+            z-index: 5; /* Keeps logo crisp on top of the images */
         }
 
         .logo {
@@ -58,54 +58,57 @@
             height: auto;
         }
 
-        /* --- NEW ALIGNED IMAGE ROW SECTION --- */
+        /* --- COLLAGE ROW SECTION --- */
         .image-row {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: flex-end; /* Bottom-aligns the flyer/button column perfectly with the photos */
             width: 90%;
-            max-width: 1000px;
-            gap: 4%; /* Space between the three columns */
+            max-width: 800px;
+            gap: 0; /* No padding or gaps between the columns */
             
-            /* Pulls the row up so it tucks under the Hebrew text */
-            margin-top: -6%; 
+            /* Pulls the row up to align exactly with the top line of the Hebrew text */
+            margin-top: -3.2%; 
             position: relative;
             z-index: 3; 
         }
 
         .gallery-img {
-            width: 30%; /* Forces images to take up 1/3 of the row */
+            width: 24%; /* Balanced sizing to frame under the logo seamlessly */
+            height: auto;
             object-fit: cover;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            display: block;
         }
 
-        /* Container specifically for the 3rd slot (Flyer + Button) */
+        /* Container for the 3rd slot (Flyer + Button) */
         .flyer-column {
-            width: 30%;
+            width: 24%; /* Matches the exact width of the images for perfect symmetry */
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px; /* Space between flyer and button */
+            gap: 8px; /* Clean, tight space between flyer and its button */
         }
 
         .flyer {
             width: 100%;
             height: auto;
             aspect-ratio: 3/4;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            display: block;
         }
 
-        /* --- SMALLER CUSTOM BUTTON STYLE --- */
+        /* --- SMALL CAPTION BUTTON STYLE --- */
         .custom-ticket-button {
             font-family: "Times New Roman", Times, serif;
-            font-size: 0.8rem; /* Shrunk font size */
+            font-size: 0.75rem; 
             color: #000000;
             text-decoration: none;
             letter-spacing: 0.05rem;
             
             border: 1px solid #000000; 
-            padding: 8px 24px; /* Reduced padding for a more subtle button */
+            padding: 6px 20px; 
             background-color: transparent;
+            width: fit-content;
+            text-align: center;
             
             transition: all 0.3s ease;
             text-transform: uppercase;
@@ -166,15 +169,18 @@
                 width: 90%;
             }
             
-            /* Stacks the images in a single column on phones */
+            /* Stacks the elements vertically on small screens */
             .image-row {
                 flex-direction: column;
                 align-items: center;
-                gap: 40px;
-                margin-top: 10px; /* Removes negative overlap on mobile */
+                gap: 30px;
+                margin-top: 20px; /* Resets overlap layout on phones */
             }
             .gallery-img, .flyer-column {
-                width: 70%; /* Makes them larger on small screens */
+                width: 75%; 
+            }
+            .custom-ticket-button {
+                width: 80%;
             }
             
             .description {
@@ -215,7 +221,7 @@
             <img src="4Z3A6543.jpg" alt="Machrozet Art 2" class="gallery-img">
             
             <div class="flyer-column">
-                <img src="0604_STHL.png" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
+                <img src="STHL_0604.jpg" alt="Saw Thunder Heard Lightning Flyer" class="flyer">
                 <a href="https://www.tickettailor.com/events/machrozetworks/2178845" target="_blank" class="custom-ticket-button">
                     Details 
                 </a>
