@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machrozet</title>
+    <style>
+        :root {
+            --bg-color: #F2F1EA;
+            --text-color: #000000;
+            --font-title: "Swiss911 XCm BT Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-main: "Times New Roman", Times, serif;
+            --font-mono: "Monospace 821 WGL", "Courier New", monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-color);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- GLOBAL LINKS (No underlines anywhere) --- */
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            border: none;
+            transition: opacity 0.2s ease;
+        }
+        a:hover {
+            text-decoration: none;
+            border: none;
+            opacity: 0.5;
+        }
+
+        /* --- LAYOUT GRID --- */
+        .page-wrapper {
+            display: flex;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px;
+            gap: 80px;
+        }
+
+        /* --- LEFT SIDEBAR --- */
+        .sidebar {
+            width: 210px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 40px;
+            height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+        .sidebar::-webkit-scrollbar { display: none; }
+
+        .sidebar-top {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            width: 100%;
+            height: auto;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .site-info {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            line-height: 1.3;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .studio-about {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-menu {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-bottom {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+
+        /* --- RIGHT CONTENT AREA --- */
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
+            padding-bottom: 40px;
+            max-width: 1100px;
+        }
+
+        /* --- EVENT STYLING --- */
+        .event-section {
+            width: 100%;
+        }
+
+        .event-title {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .event-subtitle {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+        }
+
+        .event-meta {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        /* TWO COLUMN LAYOUT: Content on left, Bios on right */
+        .event-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 60px;
+        }
+        .event-main {
+            display: flex;
+            flex-direction: column;
+        }
+        .event-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .event-description {
+            font-family: var(--font-main);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 40px;
+        }
+        .event-description p {
+            margin: 0 0 15px 0;
+        }
+        .event-description h3 {
+            font-family: var(--font-main);
+            font-size: 1rem;
+            margin: 30px 0 10px 0;
+            text-transform: uppercase;
+        }
+        .event-description i {
+            font-style: italic;
+        }
+
+        /* Two-Column List for Artworks */
+        .two-column-list {
+            column-count: 2;
+            column-gap: 40px;
+            margin-bottom: 30px;
+        }
+        .two-column-list p {
+            break-inside: avoid;
+            margin-bottom: 20px;
+        }
+
+        .boxed-text {
+            border: 1px solid var(--text-color);
+            padding: 15px;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        /* --- VARIED IMAGE LAYOUTS --- */
+        .img-block {
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        .img-block img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .grid-varied {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .grid-varied img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .span-2 { grid-column: span 2; }
+        .span-3 { grid-column: span 3; }
+
+        /* --- BIO STYLING --- */
+        .bio-block {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .bio-img {
+            width: 100%;
+            max-width: 120px;
+            height: auto;
+        }
+        .bio-text {
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* --- CREDITS & ICONS --- */
+        .photo-credit {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .camera-icon {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: #000;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            display: flex;
+            justify-content: flex-end;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .page-wrapper { flex-direction: column; padding: 20px; gap: 40px; }
+            .sidebar { width: 100%; position: relative; top: 0; height: auto; }
+            .sidebar-bottom { margin-top: 20px; }
+            .event-layout { grid-template-columns: 1fr; gap: 40px; }
+            .image-grid, .grid-varied { grid-template-columns: 1fr; }
+            .span-2, .span-3 { grid-column: span 1; }
+            .two-column-list { column-count: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper">
+        
+        <!-- LEFT SIDEBAR -->
+        <nav class="sidebar">
+            <div class="sidebar-top">
+                <a href="index.html">
+                    <img src="mach logo.png" alt="Machrozet" class="logo">
+                </a>
+                
+                <div class="site-info">
+                    <div class="studio-about">
+                        <span>MULTI-DISCIPLINARY STUDIO</span>
+                        <a href="about.html">ABOUT</a>
+                    </div>
+                    <a href="mailto:8@machrozet.com">8@MACHROZET.COM</a><br>
+                    <a href="https://www.instagram.com/machrozet8/" target="_blank">IG: @MACHROZET8</a>
+                </div>
+
+                <div class="nav-menu">
+                    <a href="#event-1">TOUCH & RELEASE</a>
+                    <a href="#event-2">CABARET CHESHBON HANEFESH</a>
+                    <a href="#event-3">SAW THUNDER HEARD LIGHTNING</a>
+                    <a href="#event-4">MACHROZET X MAZAL CARNAVAL</a>
+                </div>
+            </div>
+
+            <div class="sidebar-bottom">
+                2026.5687
+            </div>
+        </nav>
+
+        <!-- RIGHT SCROLLING CONTENT -->
+        <main class="content">
+
+            <!-- EVENT 1 -->
+            <section id="event-1" class="event-section">
+                <h1 class="event-title">TOUCH & RELEASE</h1>
+                <h2 class="event-subtitle">A SUMMER’S END PROCESSION & CONCERT</h2>
+                <div class="event-meta">SEPTEMBER 17, 2026 | LOS ANGELES RIVER, FROGTOWN</div>
+                
+                <div class="event-layout">
+                    <div class="event-main">
+                        
+                        <!-- Images Above Description -->
+                        <div class="image-grid" style="margin-bottom: 20px;">
+                            <img src="tr 34 w mini logo.jpg" alt="Touch & Release">
+                            <img src="TR_DSC00015.jpeg" alt="Touch & Release">
+                        </div>
+
+                        <div class="event-description">
+                            <p>A shared river between two bordering habitats generates new dynamic life. Ripe with variation. Summer has had her way with us all, leaving our focus pleasantly frayed and scattered across the season. Before fall’s arrival, we gather together for a homecoming in three acts grounded with the ancient custom of Tashlich.</p>
+                            <p>The LA River is our city's most tangible natural vein; channelized, concrete, yet alive. We playfully breach that boundary through physical contact, and sound. After sunset, the river will be lit and amplified with site-specific performances from Jake Chapman on vibraphone and Eva Myra May on synth & hardware.</p>
+                            
+                            <div class="boxed-text">
+                                Process guides for Touch & Release: priming receptivity on individual and collective levels /:/ openness to the process of letting go /:/ the edge effect [ecologically & culturally] /:/ the custom of tashlich
+                            </div>
+                        </div>
+
+                        <!-- Images Below Description -->
+                        <div class="grid-varied">
+                            <img src="TR_DSC00001-Edit-Edit.jpeg" alt="Touch & Release" class="span-3">
+                            <img src="TR_DSC00010-Edit-Edit.jpeg" alt="Touch & Release" class="span-2">
+                            <img src="TR_DSC00033.jpeg" alt="Touch & Release">
+                            <img src="TR_DSC00011-Edit-Edit.jpeg" alt="Touch & Release">
+                            <img src="TR_IMG_20260928_0004-Edit.jpeg" alt="Touch & Release" class="span-2">
+                        </div>
+
+                        <div class="photo-credit">
+                            <a href="https://www.flaticon.com/free-icons/camera" title="camera icons" target="_blank">
+                                <svg class="camera-icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                            </a>
+                            SHELLY BADAL
+                        </div>
+                    </div>
+
+                    <div class="event-sidebar">
+                        <div class="bio-block">
+                            <img src="michelle crop.JPG" class="bio-img" alt="Michelle Shofet">
+                            <p class="bio-text">Michelle Shofet is an artist and designer living in Los Angeles. She is co-founder of Nocturnal Medicine–an art and design studio that creates experiences, spaces & media for working through the social & emotional challenges of radical environmental change. Her research interests include themes of abject landscapes, cultural memory and identity politics.</p>
+                        </div>
+                        <div class="bio-block">
+                            <img src="jake tr.jpg" class="bio-img" alt="Jake Chapman">
+                            <p class="bio-text">Jake Chapman (aka Chappy Milkshake) is an internationally renowned vibraphonist from Los Angeles, combining virtuosic mallet percussion performance with his unique blend of musical influences.</p>
+                        </div>
+                        <div class="bio-block">
+                            <img src="eva tr.JPG" class="bio-img" alt="Eva Myra May">
+                            <p class="bio-text">Eva Myra May intersex artist, producer, and designer based in Los Angeles. currently developing a sound rooted in alternative productions, queer diy sub-cultures, and gender euphoria. her sets are multi-format from vinyl to improvised live hardware, while each performance a cohesive attempt at channeling raw emotional reflections of identity, vice, and virtue through the transformative energy of dance floors and community third spaces.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EVENT 2 -->
+            <section id="event-2" class="event-section">
+                <h1 class="event-title">MACHROZET AT CABARET CHESHBON HANEFESH</h1>
+                <div class="event-meta">AUGUST 16, 2026 | DER NISTER JEWISH CULTURAL CENTER, LOS ANGELES</div>
+                
+                <div class="event-layout">
+                    <div class="event-main">
+                        
+                        <!-- Image Above Description -->
+                        <div class="img-block">
+                            <img src="liz_der nister.JPG" alt="Liz Berger">
+                        </div>
+
+                        <div class="event-description">
+                            <p>Artist Liz Berger, using charcoal, paper, a soul in a body, sounds in a room; choreographing Elul, Tishre, Teshuva and Tashlich. Berger’s 9 minute durational performance developed in collaboration with Machrozet.</p>
+                        </div>
+
+                        <!-- Images Below Description -->
+                        <div class="image-grid">
+                            <img src="liz_der nister2.jpeg" alt="Liz Berger 2">
+                            <img src="liz_der nister3.jpeg" alt="Liz Berger 3">
+                        </div>
+
+                        <a href="https://www.dernister.org/events/cabaret-cheshbon-hanefesh" target="_blank" class="event-meta">MORE INFO</a>
+
+                        <div class="photo-credit">
+                            <a href="https://www.flaticon.com/free-icons/camera" title="camera icons" target="_blank">
+                                <svg class="camera-icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                            </a>
+                            COURTESY OF THE ARTIST
+                        </div>
+                    </div>
+
+                    <div class="event-sidebar">
+                        <div class="bio-block">
+                            <img src="bkall-173.jpg" class="bio-img" alt="Liz Berger">
+                            <p class="bio-text">Liz Berger is an artist and organizer based in Los Angeles, CA. She creates work that explores the concept of connection and its relationship to our material and immaterial experiences as humans on this earth. She is interested in collaborative and process-based work, alternative spaces, and facilitating meaningful interactions between humans and non-humans alike.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EVENT 3 -->
+            <section id="event-3" class="event-section">
+                <h1 class="event-title">SAW THUNDER HEARD LIGHTING</h1>
+                <h2 class="event-subtitle">A MUSIC & ART SHOWCASE</h2>
+                <div class="event-meta">JUNE 4TH, 2026 | LINT STUDIOS, LOS ANGELES</div>
+                
+                <div class="event-layout" style="grid-template-columns: 1fr;">
+                    <div class="event-main">
+                        
+                        <!-- Images Above Description -->
+                        <div class="image-grid" style="margin-bottom: 30px;">
+                            <img src="0604_STHL.png" alt="STHL Flyer">
+                            <img src="4Z3A6292.jpg" alt="STHL Documentation">
+                        </div>
+
+                        <div class="event-description">
+                            <p>At Mount Sinai, <i>"All the people saw the sounds and the lightning, the voice of the horn and the mountain smoking"</i>.</p>
+                            <p>Drawing from the sensory and symbolic language of Shavuot, Saw Thunder Heard Lightning brings together musicians and visual artists across five live sets and eight artworks for one night asking: How might sound, sight, scent, and taste touch the time spent in a shared room?</p>
+                            <p>Participating artists and performers engage with themes of harvest, joy, reception, and revelation. Exploring the theme of union, each live set was conceived as a collaboration between musicians and artist pairings. Exhibited artworks highlight motifs such as fruit, dairy, lightning, and wheat, across sculpture, natural dyes, edible elements, and site-specific installations.</p>
+                            <p>Made in partnership with AFIPO.</p>
+
+                            <h3>PERFORMANCES</h3>
+                            <p>AGAT (Vox, Drums, Guitar) x Shawn Law Yone (Violin)<br>
+                            Odeya Nini (Vox) x Corey Fogel (Drum Kit & Percussion)<br>
+                            Livya Howard-Yashar (Movement & Body Percussion) x Corey Fogel (Drum Kit)<br>
+                            Joshua Zeitlin (Trumpet) x Seventh Spiel (Hardware) x Livya Howard-Yashar (Percussion)<br>
+                            Alan Niku (Tar) x Jamie Papish (Hand Drum)</p>
+
+                            <h3>ARTISTS / ARTWORKS / DIMENSIONS</h3>
+                            <!-- Two column list for artworks -->
+                            <div class="two-column-list">
+                                <p>Liz Berger<br>Natural dye activation<br>@27339k</p>
+                                <p>Adrienne Adar<br>Play the Hands You’re Given, 2026<br>7 channel, live interactive sound sculptures. Dimensions variable.<br>Materials: Bronze, Plant Material (rosemary, fern), handmade electronics, mixer, speaker.<br>@adrienneadar</p>
+                                <p>Kim Kyne Cohen<br>Born Again, 2026<br>NFS, glaze, underglaze & acrylic on ceramic<br>14x12.5"<br><br>Strawberry 2024 glazed ceramic<br>13” x 7” x 6"<br>@kimkynecohen</p>
+                                <p>Masha Sheinina<br>Sex Pot, 2024 Ceramic, nichrome wire, lusters<br>18” x 19” x 19”<br>@kakashaceramics</p>
+                                <p>Ari Salka & Chris Gwillim<br>Study of Partial Unfolding & Study of an Unfolding, 2026<br>Canvas, Pigment, Metal<br>Dimensions Variable<br>@drawingwithpaint<br>Both works are site-responsive and may be adapted to different architectural conditions</p>
+                                <p>Irina Skorynyakova<br>Lightning<br>2026<br>14” D x 37” W x 5’7” H<br>Steel, rock from pisgah crater, candle</p>
+                            </div>
+
+                            <!-- Back to single column -->
+                            <p><i>“The manifestation of “Lightning” came through welding, a process that feels like a literal attempt to control electrical energy. There is something inherently magical in this act of transforming electricity into form. The sculpture extends toward the heavens, catching what comes from above through a candle, while simultaneously rooting itself into the ground. It becomes a meeting point between forces above and below, between electricity and flame, earth and sky, the physical and the metaphysical.”</i> - Irina Skorynyakova</p>
+
+                            <h3>TEAM</h3>
+                            <p>Bobby Guevara, Eric Penea - Sound<br>
+                            Joseph Hu - Art Handling<br>
+                            Omer Yousef - Creative Tech<br>
+                            Shelly Badal - Curator, Producer</p>
+                        </div>
+
+                        <!-- Varied Image Grid Below Description -->
+                        <div class="grid-varied">
+                            <img src="4Z3A6332.jpg" alt="STHL" class="span-2">
+                            <img src="4Z3A6394.jpg" alt="STHL">
+                            <img src="4Z3A6444.jpg" alt="STHL">
+                            <img src="4Z3A6450.jpg" alt="STHL" class="span-2">
+                            <img src="4Z3A6469.jpg" alt="STHL" class="span-3">
+                            <img src="4Z3A6479.jpg" alt="STHL">
+                            <img src="4Z3A6503.jpg" alt="STHL">
+                            <img src="4Z3A6525.jpg" alt="STHL">
+                            <img src="4Z3A6542.jpg" alt="STHL" class="span-2">
+                            <img src="4Z3A6543.jpg" alt="STHL">
+                            <img src="4Z3A6545.jpg" alt="STHL">
+                            <img src="4Z3A6548.jpg" alt="STHL" class="span-2">
+                            <img src="4Z3A6586.jpg" alt="STHL" class="span-3">
+                            <img src="4Z3A6606.jpg" alt="STHL">
+                            <img src="4Z3A6607.jpg" alt="STHL">
+                            <img src="4Z3A6612.jpg" alt="STHL">
+                            <img src="4Z3A6656.jpg" alt="STHL" class="span-2">
+                            <img src="4Z3A6660.jpg" alt="STHL">
+                            <img src="4Z3A6673.jpg" alt="STHL" class="span-3">
+                            <img src="4Z3A6738-2.jpg" alt="STHL">
+                            <img src="4Z3A6779.jpg" alt="STHL">
+                            <img src="4Z3A6811.jpg" alt="STHL">
+                        </div>
+
+                        <div class="photo-credit">
+                            <a href="https://www.flaticon.com/free-icons/camera" title="camera icons" target="_blank">
+                                <svg class="camera-icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                            </a>
+                            ANDREA NAYELI
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EVENT 4 -->
+            <section id="event-4" class="event-section">
+                <h1 class="event-title">MACHROZET X MAZAL CARNAVAL</h1>
+                <h2 class="event-subtitle">OPEN AIR DAY PARTY & MARKET</h2>
+                <div class="event-meta">DEC 20TH, 2025 | MAZAL, LOS ANGELES</div>
+                
+                <div class="event-layout" style="grid-template-columns: 1fr;">
+                    <div class="event-main">
+                        
+                        <!-- Image Above Description -->
+                        <div class="img-block">
+                            <img src="JEB7863.jpg" alt="Mazal Carnaval">
+                        </div>
+
+                        <div class="event-description">
+                            <p>A soft launch with market vendors 23Carat, Anya Dikareva, and Popsy Wolf.<br>
+                            Music: Dor Wand<br>
+                            Floral Installations: Liz Berger</p>
+                        </div>
+
+                        <!-- Images Below Description -->
+                        <div class="image-grid">
+                            <img src="_JEB7759.jpg" alt="Mazal Carnaval">
+                            <img src="_JEB7742.jpg" alt="Mazal Carnaval">
+                            <img src="_JEB7737.jpg" alt="Mazal Carnaval">
+                            <img src="_JEB7706-Edit-Edit.jpg" alt="Mazal Carnaval">
+                        </div>
+
+                        <div class="photo-credit">
+                            <a href="https://www.flaticon.com/free-icons/camera" title="camera icons" target="_blank">
+                                <svg class="camera-icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                            </a>
+                            NINA KOYFMAN
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer>
+                <a href="#" title="Back to top">↑ TOP</a>
+            </footer>
+
+        </main>
+    </div>
+
+</body>
+</html>
